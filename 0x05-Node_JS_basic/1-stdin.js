@@ -1,5 +1,3 @@
-// procees input from stdin
-
 console.log('Welcome to Holberton School, what is your name?');
 
 process.stdin.on('readable', () => {
@@ -10,5 +8,5 @@ process.stdin.on('readable', () => {
 });
 
 process.stdin.on('end', () => {
-  process.stdout.write('important software is now closing\n');
+  process.stdout.write('This important software is now closing\n');
 });
