@@ -1,0 +1,16 @@
+{
+  "name": "0x06-unittests_in_js",
+  "version": "1.0.0",
+  "description": "Unittests in js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Adeboyejo Akinbode",
+  "license": "ISC",
+  "dependencies": {
+    "install": "^0.13.0",
+    "mocha": "^7.2.0",
+    "npm": "^10.8.3"
+  }
+}
