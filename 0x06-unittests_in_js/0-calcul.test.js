@@ -2,19 +2,18 @@ const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', function() {
-  it('should return 4 when a = 1 and b = 3', function() {
-    assert.strictEqual(calculateNumber(1, 3), 4);
-  });
 
-  it('should return 5 when a = 1 and b = 3.7', function() {
-    assert.strictEqual(calculateNumber(1, 3.7), 5);
-  });
+  params = [
+    { a: 1, b: 3, expected: 4 },
+    {a: 1, b: 3.7, expected: 5 },
+    { a: 1.2, b: 3.7, expected: 5 },
+    { a: 1.5, b: 3.7, expected: 6 },
+    { a: -2, b: 2.2, expected: 0 },
+  ];
 
-  it('should return 5 when a = 1.2 and b = 3.7', function() {
-    assert.strictEqual(calculateNumber(1.2, 3.7), 5);
-  });
-
-  it('should return 6 when a = 1.5 and b = 3.7', function() {
-    assert.strictEqual(calculateNumber(1.5, 3.7), 6);
+  params.forEach(item => {
+    it(`should return ${item.expected} when a = ${item.a} and b = ${item.b}`, function() {
+      assert.strictEqual(calculateNumber(item.a, item.b), item.expected);
+    });
   });
 });
