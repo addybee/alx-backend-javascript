@@ -3,7 +3,7 @@ const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', function() {
 
-  params = [
+  const params = [
     { a: 1, b: 3, expected: 4 },
     {a: 1, b: 3.7, expected: 5 },
     { a: 1.2, b: 3.7, expected: 5 },
