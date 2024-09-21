@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const sendPaymentRequestToApi = require('./4-payment');
 const Utils = require('./utils');
 const { expect } = require('chai');
-const calculateNumber = require('./2-calcul');
+const calculateNumber = require('./2-calcul_chai');
 
 describe('spies', function() {
   it('Verify that the stub is being called with type = SUM, a = 100, and b = 20', function() {

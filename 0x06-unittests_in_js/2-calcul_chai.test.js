@@ -1,5 +1,5 @@
 const { expect } = require('chai');;
-const calculateNumber = require('./2-calcul');
+const calculateNumber = require('./2-calcul_chai');
 
 
 describe('calculateNumber', function() {
@@ -13,8 +13,8 @@ describe('calculateNumber', function() {
   ];
 
   params.forEach(item => {
-    it(`should return ${item.expected} when type = ${item.type}, a = ${item.a} and b = ${item.b}`, function() {
-      expect(2 + 2).to.equal(4)
+    it(`chai should return ${item.expected} when type = ${item.type}, a = ${item.a} and b = ${item.b}`, function() {
+      expect(calculateNumber(item.type, item.a, item.b)).to.equal(item.expected);
     });
   });
 });
