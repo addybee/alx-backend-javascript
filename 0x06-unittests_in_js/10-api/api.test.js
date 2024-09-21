@@ -39,6 +39,17 @@ describe('cart page', function () {
       }
     });
   });
+
+  it('should return the correct status code when :id is absent', function (done) {
+    request('http://localhost:7865/cart/', function name(error, response, body) {
+      if (error) {
+        done(error);
+      } else {
+        expect(response.statusCode).to.equal(404);
+        done();
+      }
+    });
+  });
 });
 
 
