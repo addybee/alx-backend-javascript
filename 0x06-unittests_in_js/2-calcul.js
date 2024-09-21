@@ -11,7 +11,7 @@ function calculateNumber(type, a, b) {
         return 'Error';
       }
     default:
-      return undefined
+      break;
   }
 }
 

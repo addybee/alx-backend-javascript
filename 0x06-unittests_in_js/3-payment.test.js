@@ -5,7 +5,7 @@ const { expect } = require('chai');
 
 const spy = sinon.spy(Utils, 'calculateNumber');
 describe('spies', function() {
-  it('validate the usage of the Utils function', function() {
+  it('validate the usage of the Utils function with args', function() {
     sendPaymentRequestToApi(100, 20);
     expect(spy.calledWith('SUM', 100, 20)).to.equal(true);
   });
