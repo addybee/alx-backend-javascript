@@ -11,17 +11,16 @@ describe('Hooks', function() {
       // Runs before each test in this block
       spy = sinon.spy(console, 'log');
     });
-  
+
     afterEach(function () {
       // Runs after each test in this block
       spy.restore();
     });
-  
+
     it('should call console log once and with The total is: 120', function() {
       sendPaymentRequestToApi(100, 20);
       sinon.assert.calledWith(spy, 'The total is: 120');
       sinon.assert.calledOnce(spy);
-
     });
   });
 
@@ -31,12 +30,12 @@ describe('Hooks', function() {
       // Runs before each test in this block
       spy = sinon.spy(console, 'log');
     });
-  
+
     afterEach(function () {
       // Runs after each test in this block
       spy.restore();
     });
-  
+
     it('should call console log once and with The total is: 20', function() {
       sendPaymentRequestToApi(10, 10);
       sinon.assert.calledWith(spy, 'The total is: 20');
