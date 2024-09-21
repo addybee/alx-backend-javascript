@@ -53,12 +53,12 @@ describe('login page', function () {
         body: data,
       },
       (error, response, body) => {
-        if (err) {
+        if (error) {
           done(error);
         } else {
           console.log(body);
           expect(response.statusCode).to.equal(200);
-          expect(body).to.equal(`Welcome ${data.userName}`);
+          expect(body).to.equal(`Welcome :${data.userName}`);
           done();
         }
       },
