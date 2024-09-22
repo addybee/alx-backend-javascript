@@ -1,9 +1,12 @@
 import readDatabase from '../utils';
 
+const dbFilename = process.argv[2] || 'database.csv';
+
+
 class StudentsController {
   static getAllStudents(request, response) {
     response.statusCode = 200;
-    readDatabase(process.argv[2])
+    readDatabase(dbFilename)
       .then((data) => {
         response.write('This is the list of our students');
         const fields = Object.keys(data).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
@@ -26,7 +29,7 @@ class StudentsController {
       response.send('Major parameter must be CS or SWE');
     }
 
-    readDatabase(process.argv[2])
+    readDatabase(dbFilename)
       .then((data) => {
         response.send(`List: ${data[major].join(', ')}`);
       })
