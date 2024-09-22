@@ -4,7 +4,7 @@ function countStudents(path) {
   try {
     const data = readFileSync(path, { encoding: 'utf-8' });
 
-    const lines = data.split('\n').slice(1);
+    const lines = data.trim().split('\n').slice(1);
     const fieldObject = {};
 
     lines.forEach((val) => {
