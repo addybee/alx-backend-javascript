@@ -6,22 +6,16 @@ function readDatabase(path) {
       if (err) {
         reject(new Error('Cannot load the database'));
       } else {
-        const lines = data.split('\n').slice(1); // Skip the header line.
+        const lines = data.split('\n').slice(1);
         const fieldObject = {};
 
-        lines.forEach((line) => {
-          const trimmedLine = line.trim();
-          if (trimmedLine) { // Check if line is not empty.
-            const [firstname, , , field] = trimmedLine.split(',');
-            if (firstname && field) { // Ensure both 'firstname' and 'field' are not undefined.
-              if (!fieldObject[field]) {
-                fieldObject[field] = [];
-              }
-              fieldObject[field].push(firstname);
-            }
+        lines.forEach((val) => {
+          const [firstname, , , field] = val.trim().split(',');
+          if (!fieldObject[field]) {
+            fieldObject[field] = [];
           }
+          fieldObject[field].push(firstname);
         });
-
         resolve(fieldObject);
       }
     });
