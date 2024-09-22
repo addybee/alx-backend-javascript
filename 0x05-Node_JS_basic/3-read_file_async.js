@@ -1,36 +1,30 @@
-const { exec } = require('child_process');
-const util = require('util');
+const { readFile } = require('fs').promises;
 
-const execPromise = util.promisify(exec);
+function countStudents(path) {
+  return new Promise((resolve, reject) => {
+    readFile(path, { encoding: 'utf-8' })
+      .then((data) => {
+        const lines = data.trim().split('\n').slice(1);
+        const fieldObject = {};
+        // group first names base on field and save as an object of arrays
+        lines.forEach((val) => {
+          const [firstname, , , field] = val.trim().split(',');
+          if (!fieldObject[field]) {
+            fieldObject[field] = [];
+          }
+          fieldObject[field].push(firstname);
+        });
 
-async function countStudents(path) {
-  try {
-    // Read the file content
-    const { stdout: fileContent } = await execPromise(`cat "${path}"`);
-    const trimmedFileContent = fileContent.trim();
-
-    // Count the lines excluding the header
-    const { stdout: lineCount } = await execPromise(`echo "${trimmedFileContent}" | wc -l`);
-    console.log('Number of students:', lineCount.trim() - 1); // Subtract 1 for the header row
-
-    // Extract unique fields (assumed in the 4th column)
-    const { stdout: fieldsOutput } = await execPromise(`echo "${trimmedFileContent}" | awk -F, 'NR>1 {print $4}' | sort | uniq`);
-    const fields = fieldsOutput.trim().split('\n');
-
-    /// Collect promises for each field
-    const promises = fields.map(async (field) => {
-      const { stdout: counts } = await execPromise(`echo "${trimmedFileContent}" | awk -F, -v field="${field}" '$4 == field {count++} END {print count}'`);
-      const { stdout: namesOutput } = await execPromise(`echo "${trimmedFileContent}" | awk -F, -v field="${field}" '$4 == field {print $1}'`);
-
-      const names = namesOutput.trim().split('\n').join(', ');
-      console.log(`Number of students in ${field}: ${counts.trim()}. List: ${names}`);
-    });
-
-    // Await all promises
-    await Promise.all(promises);
-  } catch (err) {
-    throw new Error('Cannot load the database');
-  }
+        console.log(`Number of students: ${lines.length}`);
+        Object.keys(fieldObject).forEach((key) => {
+          console.log(`Number of students in ${key}: ${fieldObject[key].length}. List: ${fieldObject[key].join(', ')}`);
+        });
+        resolve();
+      })
+      .catch(() => {
+        reject(new Error('Cannot load the database'));
+      });
+  });
 }
 
 module.exports = countStudents;
