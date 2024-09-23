@@ -17,7 +17,7 @@ describe('index page', function () {
 
 describe('cart page', function () {
   it('should return the correct status code when :id is not a number', function (done) {
-    request('http://localhost:7865/cart/view', function name(error, response, body) {
+    request('http://localhost:7865/cart/view', function(error, response, body) {
       if (error) {
         done(error);
       } else {
@@ -28,20 +28,19 @@ describe('cart page', function () {
   });
 
   it('should return the correct status code when :id is a number', function (done) {
-    request('http://localhost:7865/cart/50', function name(error, response, body) {
+    request('http://localhost:7865/cart/50', function(error, response, body) {
       if (error) {
         done(error);
       } else {
         expect(response.statusCode).to.equal(200);
-        expect(body).to.equal('Payment methods for cart :50');
+        expect(body).to.equal('Payment methods for cart 50');
         done();
       }
     });
   });
 
-  
   it('should return the correct status code when :id is absent', function (done) {
-    request('http://localhost:7865/cart/', function name(error, response, body) {
+    request('http://localhost:7865/cart/', function(error, response, body) {
       if (error) {
         done(error);
       } else {
