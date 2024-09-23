@@ -3,7 +3,7 @@ const request = require("request")
 
 describe('index page', function () {
   it('should return 200 status code, message: Welcome to the payment system', function (done) {
-    request('http://localhost:7865', function name(error, response, body) {
+    request('http://localhost:7865', function(error, response, body) {
       if (error) {
         done(error);
       } else {
@@ -18,7 +18,7 @@ describe('index page', function () {
 
 describe('cart page', function () {
   it('should return the correct status code when :id is not a number', function (done) {
-    request('http://localhost:7865/cart/view', function name(error, response, body) {
+    request('http://localhost:7865/cart/view', function(error, response, body) {
       if (error) {
         done(error);
       } else {
@@ -29,12 +29,12 @@ describe('cart page', function () {
   });
 
   it('should return the correct status code when :id is a number', function (done) {
-    request('http://localhost:7865/cart/50', function name(error, response, body) {
+    request('http://localhost:7865/cart/50', function (error, response, body) {
       if (error) {
         done(error);
       } else {
         expect(response.statusCode).to.equal(200);
-        expect(body).to.equal('Payment methods for cart :50');
+        expect(body).to.equal('Payment methods for cart 50');
         done();
       }
     });
@@ -67,9 +67,8 @@ describe('login page', function () {
         if (error) {
           done(error);
         } else {
-          console.log(body);
           expect(response.statusCode).to.equal(200);
-          expect(body).to.equal(`Welcome :${data.userName}`);
+          expect(body).to.equal(`Welcome ${data.userName}`);
           done();
         }
       },
